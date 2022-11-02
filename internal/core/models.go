@@ -1,37 +1,34 @@
 package core
 
-import "time"
+import (
+	"time"
+)
 
-type ExternalReference struct {
-	ID    string
-	Model string
-}
-
-func NewExternalReference(id string, model string) *ExternalReference {
-	return &ExternalReference{
-		ID:    id,
-		Model: model,
-	}
+type Model struct {
+	ID        string
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt time.Time
 }
 
 type Account struct {
-	ID          string
+	Model
 	Description string
 	Active      bool
-	Reference   ExternalReference
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
+	Reference   string
 }
 
-func NewAccount(id string, description string, active bool, reference ExternalReference) *Account {
+func NewAccount(id string, description string, active bool, reference string) *Account {
 	timestamp := time.Now()
 	return &Account{
-		ID:          id,
+		Model: Model{
+			ID:        id,
+			CreatedAt: timestamp,
+			UpdatedAt: timestamp,
+		},
 		Description: description,
 		Active:      active,
 		Reference:   reference,
-		CreatedAt:   timestamp,
-		UpdatedAt:   timestamp,
 	}
 }
 
@@ -52,45 +49,45 @@ func NewAddress(line1 string, line2 string, county County) *Address {
 }
 
 type Customer struct {
-	ID        string
+	Model
 	Email     string
 	Address   Address
 	Forename  string
 	Surname   string
 	DOB       time.Time
-	Reference ExternalReference
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	Reference string
 }
 
-func NewCustomer(id string, email string, address Address, forename string, surname string, dob time.Time, reference ExternalReference) *Customer {
+func NewCustomer(id string, email string, address Address, forename string, surname string, dob time.Time, reference string) *Customer {
 	timestamp := time.Now()
 	return &Customer{
-		ID:        id,
+		Model: Model{
+			ID:        id,
+			CreatedAt: timestamp,
+			UpdatedAt: timestamp,
+		},
 		Email:     email,
 		Address:   address,
 		Forename:  forename,
 		Surname:   surname,
 		DOB:       dob,
 		Reference: reference,
-		CreatedAt: timestamp,
-		UpdatedAt: timestamp,
 	}
 }
 
 type Card struct {
-	ID        string
-	Reference ExternalReference
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	Model
+	Reference string
 }
 
-func NewCard(id string, reference ExternalReference) *Card {
+func NewCard(id string, reference string) *Card {
 	timestamp := time.Now()
 	return &Card{
-		ID:        id,
+		Model: Model{
+			ID:        id,
+			CreatedAt: timestamp,
+			UpdatedAt: timestamp,
+		},
 		Reference: reference,
-		CreatedAt: timestamp,
-		UpdatedAt: timestamp,
 	}
 }
