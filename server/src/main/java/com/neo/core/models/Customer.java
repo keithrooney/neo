@@ -17,6 +17,8 @@ public interface Customer extends Model {
 
 	Date getDob();
 
+	Status getStatus();
+
 	ExternalReference getReference();
 
 }
